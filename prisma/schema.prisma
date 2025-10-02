@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  firstName String
+  lastName  String
+  password  String
+  bio       String? // Optional bio/about section
+  role      String   @default("member") // member, admin, etc.
+  avatar    String? // Optional avatar URL
+  interests String? // User's interests/hobbies (optional)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Simple notes relationship
+  notes Note[]
+}
+
+model Note {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  title      String
+  content    String? // The note content/body
+  category   String? // Optional category for organization
+  tags       String[]  @default([]) // Array of tags for better organization
+  priority   String? // low, medium, high, urgent (optional)
+  dueDate    DateTime? // Optional due date for task-like notes
+  isPinned   Boolean   @default(false) // For pinning important notes
+  isArchived Boolean   @default(false) // For archive functionality
+  workspace  String?   @default("default") // Workspace/folder organization
+  userId     String    @db.ObjectId
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}

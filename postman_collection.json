@@ -1,0 +1,516 @@
+{
+    "info": {
+        "_postman_id": "notes-dashboard-api",
+        "name": "Notes Management Dashboard API",
+        "description": "Complete API collection for the Notes Management Dashboard with authentication, notes CRUD, and profile management.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Authentication",
+            "item": [
+                {
+                    "name": "Register User",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"SecurePassword123!\",\n  \"confirmPassword\": \"SecurePassword123!\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/auth/signup",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "auth",
+                                "signup"
+                            ]
+                        },
+                        "description": "Register a new user account. Sets authentication cookie on success."
+                    }
+                },
+                {
+                    "name": "Login User",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"SecurePassword123!\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/auth/login",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "auth",
+                                "login"
+                            ]
+                        },
+                        "description": "Authenticate user and receive JWT token in cookie."
+                    }
+                },
+                {
+                    "name": "Get Current User",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/auth/me",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "auth",
+                                "me"
+                            ]
+                        },
+                        "description": "Get current authenticated user information."
+                    }
+                },
+                {
+                    "name": "Logout User",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/auth/logout",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "auth",
+                                "logout"
+                            ]
+                        },
+                        "description": "Logout user and clear authentication cookie."
+                    }
+                }
+            ],
+            "description": "User authentication endpoints including registration, login, user info, and logout."
+        },
+        {
+            "name": "Profile Management",
+            "item": [
+                {
+                    "name": "Get Profile",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/auth/profile",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "auth",
+                                "profile"
+                            ]
+                        },
+                        "description": "Get detailed user profile information."
+                    }
+                },
+                {
+                    "name": "Update Profile",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"bio\": \"Full-stack developer with 5+ years experience\",\n  \"interests\": \"JavaScript, TypeScript, React, Node.js\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/auth/profile",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "auth",
+                                "profile"
+                            ]
+                        },
+                        "description": "Update user profile information."
+                    }
+                },
+                {
+                    "name": "Change Password",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"currentPassword\": \"SecurePassword123!\",\n  \"newPassword\": \"NewSecurePassword456!\",\n  \"confirmPassword\": \"NewSecurePassword456!\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/auth/password",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "auth",
+                                "password"
+                            ]
+                        },
+                        "description": "Change user password with current password verification."
+                    }
+                },
+                {
+                    "name": "Delete Account",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/auth/profile",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "auth",
+                                "profile"
+                            ]
+                        },
+                        "description": "Permanently delete user account and all associated data."
+                    }
+                }
+            ],
+            "description": "User profile management including viewing, updating, password changes, and account deletion."
+        },
+        {
+            "name": "Notes Management",
+            "item": [
+                {
+                    "name": "Get All Notes",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/notes",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "notes"
+                            ]
+                        },
+                        "description": "Retrieve all notes for the authenticated user, sorted by pinned status and last updated."
+                    }
+                },
+                {
+                    "name": "Get Single Note",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/notes/{{noteId}}",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "notes",
+                                "{{noteId}}"
+                            ]
+                        },
+                        "description": "Get a specific note by ID."
+                    }
+                },
+                {
+                    "name": "Create Note",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Project Planning\",\n  \"content\": \"Plan the new dashboard project with all required features...\",\n  \"category\": \"work\",\n  \"tags\": [\"planning\", \"project\", \"dashboard\"],\n  \"priority\": \"high\",\n  \"dueDate\": \"2024-01-25T15:30:00.000Z\",\n  \"isPinned\": true,\n  \"isArchived\": false,\n  \"workspace\": \"development\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/notes",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "notes"
+                            ]
+                        },
+                        "description": "Create a new note with all optional fields."
+                    }
+                },
+                {
+                    "name": "Create Simple Note",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Quick Note\",\n  \"content\": \"Just a simple note\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/notes",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "notes"
+                            ]
+                        },
+                        "description": "Create a simple note with only title and content."
+                    }
+                },
+                {
+                    "name": "Update Note",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"noteId\": \"{{noteId}}\",\n  \"title\": \"Updated Project Planning\",\n  \"content\": \"Updated content with new requirements and specifications...\",\n  \"tags\": [\"planning\", \"project\", \"dashboard\", \"requirements\"],\n  \"priority\": \"urgent\",\n  \"isPinned\": true\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/notes",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "notes"
+                            ]
+                        },
+                        "description": "Update an existing note. Only provided fields will be updated."
+                    }
+                },
+                {
+                    "name": "Delete Note",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/notes?id={{noteId}}",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "notes"
+                            ],
+                            "query": [
+                                {
+                                    "key": "id",
+                                    "value": "{{noteId}}"
+                                }
+                            ]
+                        },
+                        "description": "Permanently delete a note."
+                    }
+                }
+            ],
+            "description": "Complete CRUD operations for notes management."
+        },
+        {
+            "name": "Bulk Operations",
+            "item": [
+                {
+                    "name": "Bulk Archive Notes",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"noteIds\": [\"note_id_1\", \"note_id_2\", \"note_id_3\"],\n  \"operation\": \"archive\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/notes/bulk",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "notes",
+                                "bulk"
+                            ]
+                        },
+                        "description": "Archive multiple notes at once."
+                    }
+                },
+                {
+                    "name": "Bulk Unarchive Notes",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"noteIds\": [\"note_id_1\", \"note_id_2\"],\n  \"operation\": \"unarchive\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/notes/bulk",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "notes",
+                                "bulk"
+                            ]
+                        },
+                        "description": "Unarchive multiple notes at once."
+                    }
+                },
+                {
+                    "name": "Bulk Delete Notes",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"noteIds\": [\"note_id_1\", \"note_id_2\"],\n  \"operation\": \"delete\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/notes/bulk",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "notes",
+                                "bulk"
+                            ]
+                        },
+                        "description": "Permanently delete multiple notes at once."
+                    }
+                },
+                {
+                    "name": "Bulk Update Workspace",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"noteIds\": [\"note_id_1\", \"note_id_2\", \"note_id_3\"],\n  \"operation\": \"updateWorkspace\",\n  \"data\": {\n    \"workspace\": \"personal\"\n  }\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/notes/bulk",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "notes",
+                                "bulk"
+                            ]
+                        },
+                        "description": "Move multiple notes to a different workspace."
+                    }
+                },
+                {
+                    "name": "Bulk Update Category",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"noteIds\": [\"note_id_1\", \"note_id_2\"],\n  \"operation\": \"updateCategory\",\n  \"data\": {\n    \"category\": \"important\"\n  }\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/notes/bulk",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "notes",
+                                "bulk"
+                            ]
+                        },
+                        "description": "Update category for multiple notes."
+                    }
+                }
+            ],
+            "description": "Bulk operations for efficient management of multiple notes."
+        }
+    ],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:3000",
+            "type": "string"
+        },
+        {
+            "key": "noteId",
+            "value": "your_note_id_here",
+            "type": "string"
+        }
+    ]
+}
