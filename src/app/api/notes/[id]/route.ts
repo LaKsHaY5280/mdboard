@@ -5,10 +5,10 @@ import { verifyJWT } from "@/lib/jwt";
 // GET /api/notes/[id] - Get a specific note by ID
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const noteId = params.id;
+    const { id: noteId } = await params;
 
     if (!noteId) {
       return NextResponse.json(
